@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Person {
 		
-	private int idperson;
+	private String idperson;
 	private String name;
 	private String lastname;
 	private Date birthdate;
@@ -32,7 +32,7 @@ public class Person {
 	 * @param films
 	 * @param groupcode
 	 */
-	public Person(int idperson,
+	public Person(String idperson,
 			String name,
             String lastname,
             Date birthdate,
@@ -55,6 +55,11 @@ public class Person {
 		setWorkplaces(workplaces);
 		
 	}
+	
+	@Override
+	public String toString() {
+        return "Person [idperson=" + idperson + ", name=" + name + ", lastname=" + lastname + ", birthdate=" + birthdate;
+        }
 	
 	/**
 	 * Adds a workplace to the list of workplaces
@@ -98,7 +103,7 @@ public class Person {
 	 * 
 	 * @return the id of the person
 	 */
-	public int getIdperson() {
+	public String getIdperson() {
 		return idperson;
 	}
 	
@@ -107,7 +112,7 @@ public class Person {
 	 * 
 	 * @param idperson the new id of the person
 	 */
-	public void setIdperson(int idperson) {
+	public void setIdperson(String idperson) {
 		this.idperson = idperson;
 	}
 	
