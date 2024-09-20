@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class Utils {
 	
+	/**Returns an Integer that is written as an input
+	 * 
+	 * @return num
+	 */
+	
 	public static int readInt() {
 		
 		Scanner sc = new Scanner(System.in);
@@ -22,6 +27,12 @@ public class Utils {
 		return num;
 		
 	}
+	
+	/**Returns a String that is written as an input
+	 * 
+	 * @return string
+	 */
+	
 	public static String readString() {
 		
 		Scanner sc = new Scanner(System.in);

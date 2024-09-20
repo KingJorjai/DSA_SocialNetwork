@@ -42,6 +42,11 @@ public class SocialNetwork {
         return INSTANCE;
 	}
 	
+	/**Returns the PersonNetwork ArrayList
+	 * 
+	 * @return personNetwork
+	 */
+	
 	public PersonNetwork getPersonNetwork() {
         return personNetwork;
     }

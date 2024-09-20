@@ -32,10 +32,19 @@ public class PersonNetwork {
 		people = new ArrayList<Person>();
 	}
 	
+	/**This method adds a Person data type to the people ArrayList
+	 * 
+	 * @param p
+	 */
+	
 	public void addPerson(Person p) {
 		people.add(p);
 	}
-	// falta documentacion
+	/**This method finds a specific Person data type from the people ArrayList
+	 * 
+	 * @param id
+	 * @return p
+	 */
 	public Person findPersonById(String id) {
 		
 		Person p = null;
@@ -53,6 +62,11 @@ public class PersonNetwork {
 		
 		return p;
 	}
+	
+	/**Loads Person data types from the file to the people ArrayList
+	 * 
+	 * @param file
+	 */
 	
 	public void loadPeopleFromFile(File file) {
     
@@ -125,6 +139,11 @@ public class PersonNetwork {
     
 	}
 	
+	/** Returns a String data type from the people ArrayList
+	 * 
+	 * @return result
+	 */
+	
 	@Override
 	public String toString() {
 		String result = "";
@@ -134,7 +153,10 @@ public class PersonNetwork {
 		return result;
 	}
 	
-	//falta documentacion
+	/**Loads each persons friends from the txt file you select
+	 * 
+	 * @param file
+	 */
 	public void loadFriends(File file) {
 	    
 		try {
@@ -174,6 +196,10 @@ public class PersonNetwork {
 			}
 	}
 	
+	/**Shows each persons friends
+	 * 
+	 */
+	
 	public void showFriendships() {
 		Iterator<Person> it = people.iterator();
 		Person p = null;
@@ -185,6 +211,10 @@ public class PersonNetwork {
 			System.out.println(p.friendsToString() + "\n");
 		}
 	}
+	
+	/**You will either print a Person data types friends, upload them into a file or do both according to the number you input.
+	 * 
+	 */
 	
 	public void retrieveFriendsBySurname() {
 		
@@ -229,7 +259,10 @@ public class PersonNetwork {
 		}			
 	}
 	
-	
+	/**Print a Person data types friends
+	 * 
+	 * @param surname
+	 */
 	public void printPersonsFriends(String surname) {
 		Iterator<Person> it = people.iterator(); 
 		Person p = null;
@@ -246,6 +279,11 @@ public class PersonNetwork {
 			}
 		}
 	}
+	
+	/**Upload a Person data types friends to a file with a name of your choice
+	 * 
+	 * @param surname
+	 */
 	
 	public void uploadPersonsFriends(String surname) {
 		
@@ -274,6 +312,11 @@ public class PersonNetwork {
 			System.out.println("Izena gaizki sartu da.");
 		}
 	}
+	
+	/**Uploads and prints a Person data types friends
+	 * 
+	 * @param surname
+	 */
 	
 	public void uploadAndPrintPersonsFriends(String surname) {
 		
@@ -306,6 +349,12 @@ public class PersonNetwork {
 		}
 	}
 	
+	/**Retrieves an ArrayList filled with Person variebles with the birthplace the function recieves as an argument
+	 * 
+	 * @param city
+	 * @return citizen
+	 */
+	
 	public ArrayList<Person> retrieveFromBirthplace(String city) {
 		Iterator<Person> it = people.iterator(); 
 		Person p = null;
@@ -320,6 +369,11 @@ public class PersonNetwork {
 		
 		return citizen;
 	}
+	
+	/** Retrieves an ArrayList filled with Person variables with a birthdate that is in between the the two years you input manually
+	 * 
+	 * @return bornInBetween
+	 */
 	
 	public ArrayList<Person> retrieveFromBirthday() {
 		
@@ -344,6 +398,12 @@ public class PersonNetwork {
 		return bornInBetween;
 	}
 	
+	/**Returns a String with all the information from all the Person data types in the ArrayList received as an argument
+	 * 
+	 * @param peopleList
+	 * @return result
+	 */
+	
 	public String arrayListToString(ArrayList<Person> peopleList) {
 		String result = "";
 		for (Person p : peopleList) {
@@ -351,6 +411,11 @@ public class PersonNetwork {
 		}
 		return result;
 	}
+	
+	/**Identify the people from the same hometown as the people received from a file
+	 * 
+	 * @param file
+	 */
 	
 	public void identifyPeopleFromSameHoemtown(File file) {
 		try {

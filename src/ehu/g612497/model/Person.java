@@ -345,6 +345,11 @@ public class Person implements Comparable<Person>{
 		this.groupcode = groupcode;
 	}
 	
+	/**Return the toString String from every Person in the friends ArrayList
+	 * 
+	 * @return toString
+	 */
+	
 	public String friendsToString() {
 		Iterator<Person> it = friends.iterator();
 		String toString = new String();
@@ -355,11 +360,21 @@ public class Person implements Comparable<Person>{
 		return toString;
 	}
 	
+	/**Return the year of birth from the Person
+	 * 
+	 * @return yearOfBirth
+	 */
+	
 	public int getYearOfBirth() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(this.getBirthdate());
 		return calendar.get(Calendar.YEAR);
 	}
+	
+	/**Compares this Person data type with another for the collections.sort function
+	 * 
+	 * return compareTo
+	 */
 	
 	public int compareTo(Person o) {
 		if(this.getBirthdate() == o.getBirthdate()) {
