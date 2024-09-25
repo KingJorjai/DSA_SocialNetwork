@@ -17,10 +17,10 @@ public class Menu {
             "Show loaded people",
             "Load friend list from file",
             "Show every friendship relationship",
-            "Print or upload into a file a persons friends",
-            "Print people that were born on a city you provide",
-            "Print people taht where born in between some years",
-            "Read from a file identifiers and upload into another file the people who where born in the same place(including themselves)"
+            "Print or upload into a file a person's friends",
+            "Print people that were born in a city you provide",
+            "Print people that were born between the given years",
+            "Read from a file identifiers and upload into another file the people who where born in the same place (including themselves)"
         };
 	
 	private int selectedOption;
@@ -96,10 +96,13 @@ public class Menu {
 				break;
 			case 5:
 				SocialNetwork.getInstance().getPersonNetwork().retrieveFriendsBySurname();
+				break;
 			case 6:
 				System.out.println(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthplace(Utils.readString()));
+				break;
 			case 7:
 				System.out.println(SocialNetwork.getInstance().getPersonNetwork().arrayListToString(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthday()));
+				break;
 			case 8:
 				
 				JFileChooser hometownFileChooser = new JFileChooser();
@@ -109,6 +112,7 @@ public class Menu {
 					File file = hometownFileChooser.getSelectedFile();
 					SocialNetwork.getInstance().getPersonNetwork().identifyPeopleFromSameHoemtown(file);
 				}
+				break;
 				
 			}
 			
