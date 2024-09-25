@@ -15,8 +15,12 @@ public class Menu {
 		{
 			"Load people from file",
             "Show loaded people",
-            "Placeholder",
-            "Placeholder",
+            "Load friend list from file",
+            "Show every friendship relationship",
+            "Print or upload into a file a person's friends",
+            "Print people that were born in a city you provide",
+            "Print people that were born between the given years",
+            "Read from a file identifiers and upload into another file the people who where born in the same place (including themselves)"
         };
 	
 	private int selectedOption;
@@ -73,8 +77,45 @@ public class Menu {
 			case 2:
 				System.out.println(SocialNetwork.getInstance().getPersonNetwork().toString());
 				break;
-					
+				
+			case 3: 
+				
+				JFileChooser friendsFileChooser = new JFileChooser();
+				friendsFileChooser.showOpenDialog(null);
+				friendsFileChooser.setVisible(true);
+				if (friendsFileChooser.getSelectedFile() != null) {
+					File file = friendsFileChooser.getSelectedFile();
+					SocialNetwork.getInstance().getPersonNetwork().loadFriends(file);;
+				}
+				else {
+					System.out.println(Messages.FILE_NOT_SELECTED);
+				}
+				break;
+			case 4: 
+				SocialNetwork.getInstance().getPersonNetwork().showFriendships();
+				break;
+			case 5:
+				SocialNetwork.getInstance().getPersonNetwork().retrieveFriendsBySurname();
+				break;
+			case 6:
+				System.out.println(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthplace(Utils.readString()));
+				break;
+			case 7:
+				System.out.println(SocialNetwork.getInstance().getPersonNetwork().arrayListToString(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthday()));
+				break;
+			case 8:
+				
+				JFileChooser hometownFileChooser = new JFileChooser();
+				hometownFileChooser.showOpenDialog(null);
+				hometownFileChooser.setVisible(true);
+				if (hometownFileChooser.getSelectedFile() != null) {
+					File file = hometownFileChooser.getSelectedFile();
+					SocialNetwork.getInstance().getPersonNetwork().identifyPeopleFromSameHoemtown(file);
+				}
+				break;
+				
 			}
+			
 		}
 		
 		System.out.println("Goodbye!");

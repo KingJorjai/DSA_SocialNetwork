@@ -1,9 +1,18 @@
 package ehu.g612497.model;
 
+import java.util.Calendar;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.Iterator;
 
-public class Person {
+import ehu.g612497.Messages;
+import java.util.Collections;
+
+public class Person implements Comparable<Person>{
 		
 	private String idperson;
 	private String name;
@@ -16,6 +25,7 @@ public class Person {
 	private ArrayList<String> workplaces;
 	private ArrayList<String> films;
 	private String groupcode;
+	private ArrayList<Person> friends; // He optado por ponerlo aqui porque me parece logico que cada persona tenga su lista de amigos.
 	
 	/**
 	 * This method creates a new Person object
@@ -30,6 +40,7 @@ public class Person {
 	 * @param studiedat where the person studied
 	 * @param workplaces where the person worked
 	 * @param films
+	 * @param friends
 	 * @param groupcode
 	 */
 	public Person(String idperson,
@@ -41,7 +52,7 @@ public class Person {
             String home,
             String studiedat,
             ArrayList<String> workplaces,
-            ArrayList<String> films,
+            ArrayList<String> films,  
             String groupcode) {
 		
 		setIdperson(idperson);
@@ -53,6 +64,8 @@ public class Person {
 		setHome(home);
 		setStudiedat(studiedat);
 		setWorkplaces(workplaces);
+		friends = new ArrayList<Person>();
+		
 		
 	}
 	
@@ -80,6 +93,15 @@ public class Person {
 	}
 	
 	/**
+	 * Adds a friend to the list of friends
+	 * 
+	 * @param friend the new friend to add
+	 */
+	public void addFriends(Person friend) {
+		friends.add(friend);
+	}
+	
+	/**
 	 * Removes a workplace from the list of workplaces
 	 * 
 	 * @param workplace the workplace to remove
@@ -95,6 +117,15 @@ public class Person {
 	 */
 	public void removeFilm(String film) {
 		films.remove(film);
+	}
+	
+	/**
+	 * Removes a friend from the list of friends
+	 * 
+	 * @param friend the friend to remove
+	 */
+	public void removeFriend(Person friend) {
+		friends.remove(friend);
 	}
 	
 	
@@ -279,6 +310,24 @@ public class Person {
 	}
 	
 	/**
+	 * This method returns the persons friends
+	 * 
+	 * @return the persons friends
+	 */
+	public ArrayList<Person> getFriends() {
+		return friends;
+	}
+	
+	/**
+	 * This method sets the films that person likes
+	 * 
+	 * @param films the new films that person likes
+	 */
+	public void setFriends(ArrayList<Person> friends) {
+		this.friends = friends;
+	}
+	
+	/**
 	 * This method returns the group code of the person in DSA
 	 * 
 	 * @return the group code of the person in DSA
@@ -296,7 +345,49 @@ public class Person {
 		this.groupcode = groupcode;
 	}
 	
+	/**Return the toString String from every Person in the friends ArrayList
+	 * 
+	 * @return toString
+	 */
 	
+	public String friendsToString() {
+		Iterator<Person> it = friends.iterator();
+		String toString = new String();
+		
+		while(it.hasNext()) {
+			toString += it.next().getIdperson() + "; ";
+		}
+		return toString;
+	}
+	
+	/**Return the year of birth from the Person
+	 * 
+	 * @return yearOfBirth
+	 */
+	
+	public int getYearOfBirth() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(this.getBirthdate());
+		return calendar.get(Calendar.YEAR);
+	}
+	
+	/**Compares this Person data type with another for the collections.sort function
+	 * 
+	 * return compareTo
+	 */
+	
+	public int compareTo(Person o) {
+		if(this.getBirthdate() == o.getBirthdate()) {
+			if(this.getLastname() == o.getLastname()) {
+				return this.getName().compareTo(o.getName());
+			}else {
+				return this.getLastname().compareTo(o.getLastname());
+			}
+		}else {
+			return (this.getYearOfBirth() - o.getYearOfBirth());
+		}
+		
+	}
 	
 
 }

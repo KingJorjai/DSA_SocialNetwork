@@ -1,5 +1,15 @@
 package ehu.g612497.model;
 
+import java.util.Scanner;
+
+import ehu.g612497.Messages;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SocialNetwork {
 	
 	/** Singleton instance */
@@ -31,6 +41,11 @@ public class SocialNetwork {
 		
         return INSTANCE;
 	}
+	
+	/**Returns the PersonNetwork ArrayList
+	 * 
+	 * @return personNetwork
+	 */
 	
 	public PersonNetwork getPersonNetwork() {
         return personNetwork;
