@@ -328,6 +328,15 @@ public class Person implements Comparable<Person>{
 	}
 	
 	/**
+	 * This method returns the surname of the person
+	 * 
+	 * @return the surname of the person 
+	 */
+	public String getSurname() {
+		return this.lastname;
+	}
+	
+	/**
 	 * This method returns the group code of the person in DSA
 	 * 
 	 * @return the group code of the person in DSA

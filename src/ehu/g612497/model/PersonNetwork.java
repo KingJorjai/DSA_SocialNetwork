@@ -363,6 +363,7 @@ public class PersonNetwork {
 		while(it.hasNext()) {
 			p = it.next();
 			if(p.getBirthplace().equals(city)) {
+				System.out.println(p.getIdperson() + ";" + p.getSurname());
 				citizen.add(p);
 			}
 		}
