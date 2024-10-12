@@ -98,7 +98,7 @@ public class Menu {
 				SocialNetwork.getInstance().getPersonNetwork().retrieveFriendsBySurname();
 				break;
 			case 6:
-				SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthplace(Utils.readString());
+				System.out.println(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthplace(Utils.readString()));
 				break;
 			case 7:
 				System.out.println(SocialNetwork.getInstance().getPersonNetwork().arrayListToString(SocialNetwork.getInstance().getPersonNetwork().retrieveFromBirthday()));
