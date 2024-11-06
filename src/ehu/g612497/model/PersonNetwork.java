@@ -406,9 +406,12 @@ public class PersonNetwork {
 	
 	public String arrayListToString(ArrayList<Person> peopleList) {
 		String result = "";
-		for (Person p : peopleList) {
-			result += p.toString() + "\n";
+		Iterator<Person> it = peopleList.iterator();
+		
+		while (it.hasNext()) {
+			result += it.next().toString() + "\n";
 		}
+		
 		return result;
 	}
 	
