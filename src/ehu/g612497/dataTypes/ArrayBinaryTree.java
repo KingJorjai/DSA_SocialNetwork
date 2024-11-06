@@ -5,9 +5,9 @@
  * @author Dr. Chase
  * @version 1.0, 8/19/08
  */
-package dsa;
+package ehu.g612497.dataTypes;
 import java.util.Iterator;
-import exceptions.*;
+import ehu.g612497.exceptions.*;
 
 public class ArrayBinaryTree<T> implements BinaryTreeADT<T>
 {  protected int count;

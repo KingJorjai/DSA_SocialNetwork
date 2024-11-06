@@ -3,7 +3,7 @@
  *
  *  Defines the interface to a stack data structure.
  */
-package dsa;
+package ehu.g612497.dataTypes;
 
 public interface StackADT<T>
 {

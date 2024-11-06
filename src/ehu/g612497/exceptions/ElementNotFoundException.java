@@ -4,7 +4,7 @@
 //  Represents the situation in which a target element is not
 //  present in a collection
 //********************************************************************
-package exceptions;
+package ehu.g612497.exceptions;
 
 public class ElementNotFoundException extends RuntimeException
 {

@@ -6,8 +6,8 @@
  * @version 1.0, 08/12/08
  */
 
-package dsa;
-import  exceptions.*;
+package ehu.g612497.dataTypes;
+import  ehu.g612497.exceptions.*;
 
 public class ArrayUnorderedList<T> extends ArrayList<T> 
          implements UnorderedListADT<T>

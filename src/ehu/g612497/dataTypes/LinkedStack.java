@@ -3,8 +3,8 @@
  *
  *  Represents a linked implementation of a stack.
  */
-package dsa;
-import exceptions.*;
+package ehu.g612497.dataTypes;
+import ehu.g612497.exceptions.*;
 import java.util.Iterator;
 
 public class LinkedStack<T> implements StackADT<T>

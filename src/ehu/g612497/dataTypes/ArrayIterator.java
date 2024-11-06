@@ -5,7 +5,7 @@
  * @author Dr. Chase
  * @version 1.0, 8/19/08
  */
-package dsa;
+package ehu.g612497.dataTypes;
 import java.util.*;
 
 public class ArrayIterator<T> implements Iterator

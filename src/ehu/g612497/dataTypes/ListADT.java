@@ -7,7 +7,7 @@
  * @version 1.0, 08/13/08
  */
 
-package dsa;
+package ehu.g612497.dataTypes;
 import java.util.Iterator;
 
 public interface ListADT<T>

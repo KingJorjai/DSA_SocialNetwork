@@ -8,8 +8,8 @@
  * @version 1.0, 08/13/08
  */
 
-package dsa;
-import exceptions.*;
+package ehu.g612497.dataTypes;
+import ehu.g612497.exceptions.*;
 import java.util.Iterator;
 
 public class ArrayList<T> implements ListADT<T>, Iterable<T>

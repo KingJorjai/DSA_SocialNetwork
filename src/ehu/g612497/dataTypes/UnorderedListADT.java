@@ -8,7 +8,7 @@
  */
 
 
-package dsa;
+package ehu.g612497.dataTypes;
 
 public interface UnorderedListADT<T> extends ListADT<T>
 {

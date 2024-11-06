@@ -3,7 +3,7 @@
  *
  *  Represents the situation in which a collection is empty.
  */
-package exceptions;
+package ehu.g612497.exceptions;
 
 public class EmptyCollectionException extends RuntimeException
 {
