@@ -1,0 +1,6 @@
+idperson,name,lastname,birthdate,gender,birthplace,home,studiedat,workplaces,films,groupcode
+Patxi123,Patxi,Etxeberria,2-6-2003,male,Donostia,Bilbao,Santa Teresa,Madrid,Forrest Gump,G612497
+Markel01,Markel,Agirre,21-2-2003,male,Bilbao,Bilbao,Zabalburu,Paris,Shrek,G612497
+Nerea32,Nerea,Ibarra,7-8-2003,female,Gernika,Bilbao,Mertzede,Bilbao,Titanic,G612497
+Esteban55,Esteban,Fernandez,15-9-2005,male,Bergara,Bergara,Mariaren Lagundia,Sevilla,The Lion King,G612497
+Thorfinn32,Thorfinn,Karlsefni,12-3-980,male,Bergara,Iceland,Leif Eriksson,Vinland,Vinland Saga,G612497

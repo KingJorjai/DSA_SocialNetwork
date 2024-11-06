@@ -1,0 +1,7 @@
+friend1,friend2
+Patxi123,Markel01
+Patxi123,Nerea32
+Patxi123,Esteban55
+Markel01,Nerea32
+Markel01,Esteban55
+Esteban55,Nerea32
