@@ -110,7 +110,7 @@ public class Menu {
 				hometownFileChooser.setVisible(true);
 				if (hometownFileChooser.getSelectedFile() != null) {
 					File file = hometownFileChooser.getSelectedFile();
-					SocialNetwork.getInstance().getPersonNetwork().identifyPeopleFromSameHoemtown(file);
+					SocialNetwork.getInstance().getPersonNetwork().identifyPeopleFromSameHometown(file);
 				}
 				break;
 				

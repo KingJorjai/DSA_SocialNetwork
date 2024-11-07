@@ -1,6 +1,7 @@
 package ehu.g612497.model;
 
 import java.io.File;
+import ehu.g612497.dataTypes.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,14 +23,16 @@ import ehu.g612497.Utils;
 public class PersonNetwork {
 	
 	
-	ArrayList<Person> people;
+	//ArrayList<Person> people;
+	LinkedBinaryTree<Person> people;
+	
 	
 	/**
 	 * This method creates a new PersonNetwork,
 	 * which is a list of people in the network
 	 */
 	public PersonNetwork() {
-		people = new ArrayList<Person>();
+		people = new LinkedBinaryTree<Person>();
 	}
 	
 	/**This method adds a Person data type to the people ArrayList
@@ -38,7 +41,15 @@ public class PersonNetwork {
 	 */
 	
 	public void addPerson(Person p) {
-		people.add(p);
+		people.addPerson(p);
+	}
+	
+	
+	
+	public void removePerson(Person p) {
+		if(people.contains(p)) {
+			people.removeIt(p);
+		}
 	}
 	/**This method finds a specific Person data type from the people ArrayList
 	 * 
@@ -48,7 +59,7 @@ public class PersonNetwork {
 	public Person findPersonById(String id) {
 		
 		Person p = null;
-		Iterator<Person> it = people.iterator();
+		Iterator<Person> it = people.iteratorInOrder();
 		boolean found = false;
 		
 		while(it.hasNext() && !found) {
@@ -147,8 +158,10 @@ public class PersonNetwork {
 	@Override
 	public String toString() {
 		String result = "";
-		for (Person p : people) {
-			result += p.toString() + "\n";
+		Iterator<Person> it = people.iteratorInOrder();
+		
+		while (it.hasNext()) {
+			result += it.next().toString() + "\n";
 		}
 		return result;
 	}
@@ -160,7 +173,7 @@ public class PersonNetwork {
 	public void loadFriends(File file) {
 	    
 		try {
-			Iterator<Person> it = people.iterator();
+			Iterator<Person> it = people.iteratorInOrder();
 			Person p = null;
 			while(it.hasNext()) {
 				p = it.next();
@@ -201,7 +214,7 @@ public class PersonNetwork {
 	 */
 	
 	public void showFriendships() {
-		Iterator<Person> it = people.iterator();
+		Iterator<Person> it = people.iteratorInOrder();
 		Person p = null;
 		
 		while(it.hasNext()) {
@@ -264,7 +277,7 @@ public class PersonNetwork {
 	 * @param surname
 	 */
 	public void printPersonsFriends(String surname) {
-		Iterator<Person> it = people.iterator(); 
+		Iterator<Person> it = people.iteratorInOrder(); 
 		Person p = null;
 		
 		while(it.hasNext()) {
@@ -287,7 +300,7 @@ public class PersonNetwork {
 	
 	public void uploadPersonsFriends(String surname) {
 		
-		Iterator<Person> it = people.iterator(); 
+		Iterator<Person> it = people.iteratorInOrder(); 
 		Person p = null;
 		
 		try{
@@ -320,7 +333,7 @@ public class PersonNetwork {
 	
 	public void uploadAndPrintPersonsFriends(String surname) {
 		
-		Iterator<Person> it = people.iterator(); 
+		Iterator<Person> it = people.iteratorInOrder(); 
 		Person p = null;
 		
 		try {
@@ -356,7 +369,7 @@ public class PersonNetwork {
 	 */
 	
 	public ArrayList<Person> retrieveFromBirthplace(String city) {
-		Iterator<Person> it = people.iterator(); 
+		Iterator<Person> it = people.iteratorInOrder(); 
 		Person p = null;
 		ArrayList<Person> citizen = new ArrayList<Person>();
 		
@@ -382,9 +395,8 @@ public class PersonNetwork {
 		System.out.println("Now could you please write the maximum year you would like to accept?");
 		int maxYear = Utils.readInt();
 		
-		Collections.sort(people);
 		ArrayList<Person> bornInBetween = new ArrayList<Person>();
-		Iterator<Person> it = people.iterator(); 
+		Iterator<Person> it = people.iteratorInOrder(); 
 		Person p = null;
 		
 		while(it.hasNext()) {
@@ -420,7 +432,7 @@ public class PersonNetwork {
 	 * @param file
 	 */
 	
-	public void identifyPeopleFromSameHoemtown(File file) {
+	public void identifyPeopleFromSameHometown(File file) {
 		try {
 			
 			Scanner sc = new Scanner(file);
@@ -435,7 +447,6 @@ public class PersonNetwork {
 			
 				try {
 					String line = sc.nextLine();
-					
 					Person p = findPersonById(line);
 					ArrayList<Person> citizens = retrieveFromBirthplace(p.getBirthplace());
 					Iterator<Person> it = citizens.iterator(); 

@@ -7,10 +7,11 @@
  */
 
 package ehu.g612497.dataTypes;
+import ehu.g612497.model.*;
 import java.util.Iterator;
 import ehu.g612497.exceptions.*;
 
-public class LinkedBinaryTree<T> implements BinaryTreeADT<T>
+public class LinkedBinaryTree<T extends Comparable<T>> implements BinaryTreeADT<T>
 {
    protected int count;
    protected BinaryTreeNode<T> root; 
@@ -31,6 +32,17 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>
    public LinkedBinaryTree (T element) 
    {  count = 1;
       root = new BinaryTreeNode<T> (element);   }
+   
+   public boolean setRoot(T newRoot) {
+	   if(root == null) {
+		   count++;
+		   root = new BinaryTreeNode<T>(newRoot);
+		   return true;
+	   }else {
+		   root.element = newRoot;
+		   return false;
+	   }
+   }
 
    /**
     * Returns a reference to the element at the root
@@ -42,6 +54,34 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T>
    {  if (root == null)
          throw new EmptyCollectionException("binary tree");
       return (root.element);   }
+   
+   public void addPerson(T p) {
+	   if(!(this.root == null)) {
+		   if(root.addPerson(p)) {
+		   count++;
+		   }
+	   }else
+		   this.setRoot(p);
+	   
+   }
+   
+   public void removeIt(T p) {
+	   if(root.findAndDestroy(p)) {
+		   count--;
+	   }
+   }
+   
+   
+   /**
+    * Returns a reference to the element at the root
+    *
+    * @return                           a reference to the specified target
+    * @throws EmptyCollectionException  if the tree is empty
+    */
+   public BinaryTreeNode<T> getRootNode() throws EmptyCollectionException
+   {  if (root == null)
+         throw new EmptyCollectionException("binary tree");
+      return (root);   }
 
    /**
     * Returns true if this binary tree is empty and false otherwise.
