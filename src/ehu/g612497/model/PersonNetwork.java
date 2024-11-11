@@ -12,7 +12,14 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -51,12 +58,20 @@ public class PersonNetwork {
 			people.removeIt(p);
 		}
 	}
+	/**
+	 * This method returns the people ArrayList
+	 * 
+	 * @return people
+	 */
+	public LinkedBinaryTree<Person> getPeople() {
+		return people;
+	}
 	/**This method finds a specific Person data type from the people ArrayList
 	 * 
 	 * @param id
 	 * @return p
 	 */
-	public Person findPersonById(String id) {
+public Person findPersonById(String id) {
 		
 		Person p = null;
 		Iterator<Person> it = people.iteratorInOrder();
@@ -84,6 +99,8 @@ public class PersonNetwork {
 		try {
 			Scanner sc = new Scanner(file);
 			int lineCount = 0;
+			sc.nextLine();
+            lineCount++;//skip first line. the first line is an example to show the file's format
 			while (sc.hasNextLine()) {
 				
 				lineCount++;
@@ -362,7 +379,7 @@ public class PersonNetwork {
 		}
 	}
 	
-	/**Retrieves an ArrayList filled with Person variebles with the birthplace the function recieves as an argument
+	/**Retrieves an ArrayList filled with Person variables with the birthplace the function receives as an argument
 	 * 
 	 * @param city
 	 * @return citizen
@@ -475,5 +492,158 @@ public class PersonNetwork {
 			System.out.println("Izena gaizki sartu da.");
 		}
 	}
-	
+	/**
+	 * Classifies all people on the network by groups, where each group has a common list of favorite movies. 
+	 * @param users
+	 * @return userGroupList
+	 */
+	public static ArrayList<ArrayList<Person>> groupUsersByFavoriteMovies(LinkedBinaryTree<Person> people) {
+	    HashMap<String, ArrayList<Person>> movieGroups = new HashMap<>();
+	    Iterator<Person> it = people.iteratorLevelOrder();
+	    while (it.hasNext()) {
+	        Person user = it.next();	      
+	        ArrayList<String> sortedMovies = new ArrayList<>();	        
+	        if (user.getFilms() != null) {
+	            sortedMovies.addAll(user.getFilms());
+	        }
+	        Collections.sort(sortedMovies);       
+	        String movieKey = String.join(",", sortedMovies);
+	        movieGroups.computeIfAbsent(movieKey, k -> new ArrayList<>()).add(user);//use movieKey to classify by groups
+	    }
+	    return new ArrayList<>(movieGroups.values());
+	}
+
+
+	/**
+	 * Finds the shortest chain of friends between two people, implemented with BFS (Breadth First Search), iterator used: iteratorLevelOrder
+	 * 
+	 * @param person1
+	 * @param person2
+	 * @return personList
+	 */
+	public ArrayList<String> findShortestFriendChain(Person p1, Person p2) {
+		if (p1.getIdperson().equals(p2.getIdperson())) {
+		    return new ArrayList<>(Collections.singletonList(p1.getIdperson()));
+		}
+	    Queue<List<Person>> queue = new LinkedList<>();
+	    ArrayList<Person> initialPath = new ArrayList<>();
+	    initialPath.add(p1);
+	    queue.offer(initialPath);
+	    Iterator<Person> it = people.iteratorLevelOrder();
+
+	    while (!queue.isEmpty()) {
+	        List<Person> currentPath = queue.poll();
+	        Person lastPersonInPath = currentPath.get(currentPath.size() - 1);
+	        while (it.hasNext()) {
+	        	Person friend = it.next();
+	        	if (lastPersonInPath.getFriends().contains(friend)) {
+	                if (friend.equals(p2)) { //chain found
+	                    ArrayList<Person> newPath = new ArrayList<>(currentPath);
+	                    newPath.add(friend);
+	                    ArrayList<String> idPath = new ArrayList<>();
+	                    for (Person person : newPath) {
+	                        idPath.add(person.getIdperson());
+	                    }
+	                    return idPath;
+	                }
+
+	                if (!currentPath.contains(friend)) { //friend not analyzed yet
+	                    List<Person> newPath = new ArrayList<>(currentPath);
+	                    newPath.add(friend);
+	                    queue.offer(newPath);
+	                }
+	            }
+	        }        
+	        it = people.iteratorLevelOrder();//reset iterator for next level
+	    }
+	    return null;
+	}
+	/**
+	 * Finds an alternative chain to the shortest one, implemented with DFS (Depth First Search), iterator used: iteratorPreOrder
+	 * 
+	 * @param person1
+	 * @param person2
+	 * @return personList
+	 */
+	public ArrayList<String> findAlternativeFriendChain(Person p1, Person p2) {
+		if (p1.getIdperson().equals(p2.getIdperson())) {
+		    return new ArrayList<>(Collections.singletonList(p1.getIdperson()));
+		}
+		Set<Person> visited = new HashSet<>();//used to avoid revisiting already analyzed people
+	    Stack<List<Person>> stack = new Stack<>();//used to store paths
+	    List<Person> initialPath = new ArrayList<>();
+	    initialPath.add(p1);
+	    stack.push(initialPath);
+	    Iterator<Person> it = people.iteratorPreOrder();	    
+	    while (!stack.isEmpty()) {
+	        List<Person> currentPath = stack.pop();
+	        Person lastPersonInPath = currentPath.get(currentPath.size() - 1);	        
+	        if (visited.contains(lastPersonInPath)) {//person already analyzed, skip him/her
+	            continue;
+	        }	        
+	        visited.add(lastPersonInPath);	        
+	        if (lastPersonInPath.equals(p2)) { //chain found
+	            ArrayList<String> idPath = new ArrayList<>();
+	            for (Person person : currentPath) {
+	                idPath.add(person.getIdperson());
+	            }
+	            return idPath;
+	        }	       
+	        while (it.hasNext()) {//check last persons's friends
+	            Person friend = it.next();	            
+	            if (lastPersonInPath.getFriends().contains(friend) && !visited.contains(friend)) {
+	                List<Person> newPath = new ArrayList<>(currentPath);
+	                newPath.add(friend);
+	                stack.push(newPath);
+	            }
+	        }
+	        it = people.iteratorPreOrder();//reset iterator for next depth
+	    }
+	    return null;
+	}
+	/**
+	 * Finds all cliques with >4 friends.
+	 * @return cliqueList
+	 */
+	public ArrayList<ArrayList<Person>> findCliquesWithMoreThanFourFriends() {
+	    ArrayList<ArrayList<Person>> cliques = new ArrayList<>();
+	    Set<Person> visited = new HashSet<>();	    
+	    Iterator<Person> it = people.iteratorPreOrder();
+	    while (it.hasNext()) {
+	        Person p = it.next();
+	        if (!visited.contains(p)) {
+	            // For each person, we try to form a clique by adding them and their friends
+	            Set<Person> currentCliqueSet = new HashSet<>();
+	            ArrayList<Person> currentClique = new ArrayList<>();
+	            Stack<Person> stack = new Stack<>();
+	            stack.push(p);
+	            currentCliqueSet.add(p);
+	            currentClique.add(p);
+
+	            while (!stack.isEmpty()) {
+	                Person current = stack.pop();
+	                for (Person friend : current.getFriends()) {//find current person's clique
+	                    boolean canAdd = true;
+	                    for (Person member : currentCliqueSet) {
+	                        if (!member.getFriends().contains(friend)) {
+	                            canAdd = false;
+	                            break;
+	                        }
+	                    }
+	                    if (canAdd && !currentCliqueSet.contains(friend)) {
+	                        currentCliqueSet.add(friend);
+	                        currentClique.add(friend);
+	                        stack.push(friend);
+	                    }
+	                }
+	            }
+	            if (currentClique.size() >= 5) {
+	                cliques.add(currentClique);
+	            }
+	            visited.addAll(currentCliqueSet);//add analyzed people to the visited hashset
+	        }
+	    }
+
+	    return cliques;
+	}	
 }

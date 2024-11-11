@@ -64,6 +64,7 @@ public class Person implements Comparable<Person>{
 		setHome(home);
 		setStudiedat(studiedat);
 		setWorkplaces(workplaces);
+		setFilms(films);
 		friends = new ArrayList<Person>();
 		
 		
@@ -71,7 +72,7 @@ public class Person implements Comparable<Person>{
 	
 	@Override
 	public String toString() {
-        return "Person [idperson=" + idperson + ", name=" + name + ", lastname=" + lastname + ", birthdate=" + birthdate;
+        return "Person [idperson=" + idperson + ", name=" + name + ", lastname=" + lastname + ", birthdate=" + birthdate +"]";
         }
 	
 	/**
