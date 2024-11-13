@@ -64,6 +64,7 @@ public class Person implements Comparable<Person>{
 		setHome(home);
 		setStudiedat(studiedat);
 		setWorkplaces(workplaces);
+		setFilms(films);
 		friends = new ArrayList<Person>();
 		
 		
@@ -71,7 +72,7 @@ public class Person implements Comparable<Person>{
 	
 	@Override
 	public String toString() {
-        return "Person [idperson=" + idperson + ", name=" + name + ", lastname=" + lastname + ", birthdate=" + birthdate;
+        return "Person [idperson=" + idperson + ", name=" + name + ", lastname=" + lastname + ", birthdate=" + birthdate +"]";
         }
 	
 	/**
@@ -353,9 +354,13 @@ public class Person implements Comparable<Person>{
 	public String friendsToString() {
 		Iterator<Person> it = friends.iterator();
 		String toString = new String();
+		Person p;
 		
 		while(it.hasNext()) {
-			toString += it.next().getIdperson() + "; ";
+			p = it.next();
+			if(p != null) {
+				toString += p.getIdperson() + "; ";
+			}	
 		}
 		return toString;
 	}
@@ -377,14 +382,14 @@ public class Person implements Comparable<Person>{
 	 */
 	
 	public int compareTo(Person o) {
-		if(this.getBirthdate() == o.getBirthdate()) {
-			if(this.getLastname() == o.getLastname()) {
+		if(this.getBirthplace().equals(o.getBirthplace())) {
+			if(this.getLastname().equals(o.getLastname())) {
 				return this.getName().compareTo(o.getName());
 			}else {
 				return this.getLastname().compareTo(o.getLastname());
 			}
 		}else {
-			return (this.getYearOfBirth() - o.getYearOfBirth());
+			return (this.getBirthplace().compareTo(o.getBirthplace()));
 		}
 		
 	}
